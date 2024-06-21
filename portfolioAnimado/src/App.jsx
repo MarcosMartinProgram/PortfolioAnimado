@@ -8,13 +8,13 @@ function App() {
   return (
     
       <div>
-        <section>
+        <section id="Home">
           <Navbar/>
         </section>
-        <section>Parallax</section>
-        <section>Services</section>
-        <section>Parallax</section>
-        <section>Portfiol1</section>
+        <section id="Services">Parallax</section>
+        <section id="Portfolio">Services</section>
+        <section id="Contact">Parallax</section>
+        <section id="About">Portfiol1</section>
         <section>Portfolio2</section>
         <section>Portfolio3</section>
         <section>Contact</section>
