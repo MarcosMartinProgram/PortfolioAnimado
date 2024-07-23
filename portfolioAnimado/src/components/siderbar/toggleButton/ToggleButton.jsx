@@ -37,8 +37,6 @@ const ToggleButton =({ setOpen }) => {
     );
 };
 
-ToggleButton.propTypes = {
-    setOpen: PropTypes.func.isRequired,
-};
+
 
 export default ToggleButton
