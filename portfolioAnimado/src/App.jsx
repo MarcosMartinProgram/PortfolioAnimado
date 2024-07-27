@@ -12,15 +12,26 @@ function App() {
     
       <div>
         <section id="Home">
-          <Navbar/>
-          <Hero/>
+          <Navbar />
+          <Hero />
         </section>
-        <section id="Services"><Parallax type="services"/></section>        
-        <section><Services/></section>
-        <section id="Portfolio"><Parallax type="portfolio"/></section>
-        <section id="About">Portfiol1</section>
-        <section id="Contact">Parallax</section>
+        <section id="Services">
+          <Parallax type="services"/>
+        </section>        
+        <section>
+          <Services/>
+        </section>
+        <section id="Portfolio">
+          <Parallax type="portfolio"/>
+        </section>
         <Portfolio />
+        <section id="About">
+          Portfiol1
+        </section>
+        <section id="Contact">
+          Contac
+          </section>
+        
         
       </div>
       
