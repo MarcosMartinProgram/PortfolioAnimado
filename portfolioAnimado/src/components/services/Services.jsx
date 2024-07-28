@@ -36,8 +36,8 @@ const Services = () => {
     >
       <motion.div className="textContainer" variants={variants}>
         <p>
-          I focus on helping your brand grow
-          <br /> and move forward
+        I specialize in fullstack development to help your
+          <br /> digital presence grow and evolve
         </p>
         <hr />
       </motion.div>
@@ -45,7 +45,7 @@ const Services = () => {
         <div className="title">
           <img src="/people.webp" alt="" />
           <h1>
-            <motion.b whileHover={{color:"orange"}}>Unique</motion.b> Ideas
+            <motion.b whileHover={{color:"orange"}}>Innovative</motion.b> Solutions 
           </h1>
         </div>
         <div className="title">

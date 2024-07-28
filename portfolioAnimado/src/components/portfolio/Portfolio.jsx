@@ -10,30 +10,35 @@ const items = [
         title: "React e-commerce",
         img: "/Ecommerce.png" ,
         desc: "Proyecto con CRUD, uso de Api, creación de usuarios, rol admin con creacion, modificación y eliminación de Categorias y Productos. Carrito de Compras con persistencia",
+        link: "https://e-comerce-react-beta.vercel.app/",
     },
     {
         id: 2,
         title: "Ecommerce en Javascript y NodeJs",
         img: "/EcommerceNodeJs.png" ,
         desc: "Proyecto con CRUD, Creación de una Api con NodeJs, deploy de FrontEnd y BackEnd, Base de Datos en la Nuve. credenciales usuario: admin@admin.com contraseña: admin123",
+        link: "https://cac-ecommerce.netlify.app/",
     },
     {
         id: 3,
         title: "Tareas App",
         img: "/Todo.png" ,
         desc: "Registrador de tareas para el día a Dia, Realizado en ReactJs con Typescript, Almacenando en LocalStorage",
+        link: "https://tareas-app-azure.vercel.app/",
     },
     {
         id: 4,
         title: "Primer Portfolio",
         img: "/Portfolio.png" ,
-        desc: "Registrador de tareas para el día a Dia, Realizado en ReactJs con Typescript, Almacenando en LocalStorage",
+        desc: "Primer portfolio personal, realizado en vanilla Javascript, Html y Css.",
+        link: "https://marcosmartinprogram.github.io/",
     },
     {
         id: 5,
         title: "Python y Django",
         img: "/Fundacion.png" ,
-        desc: "Registrador de tareas para el día a Dia, Realizado en ReactJs con Typescript, Almacenando en LocalStorage",
+        desc: "Primer proyecto realizado para curso Informatorio: Página para fundación. ",
+        link: "http://marcosmartinprogram.pythonanywhere.com/",
     },
 ];
 
@@ -51,12 +56,12 @@ const Single = ({ item }) => {
         <div className="container">
           <div className="wrapper">
             <div className="imageContainer" ref={ref}>
-              <img src={item.img} alt="" />
+              <img src={item.img} alt={item.title} />
             </div>
             <motion.div className="textContainer" style={{y}}>
               <h2>{item.title}</h2>
               <p>{item.desc}</p>
-              <button>See Demo</button>
+              <button onClick={() => window.open(item.link, '_blank', 'noopener noreferrer')}>See Demo</button>
             </motion.div>
           </div>
         </div>
