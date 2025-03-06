@@ -60,12 +60,13 @@ const Services = () => {
           className="box"
           whileHover={{ background: "lightgray", color: "black" }}
         >
-          <h2>Branding</h2>
+          <h2>Ecommerce</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            libero enim nisi aliquam consectetur expedita magni eius ex corrupti
-            animi! Ad nam pariatur assumenda quae mollitia libero repellat
-            explicabo maiores?
+          "We develop custom eCommerce solutions for businesses, helping
+           them expand their reach and optimize sales in the digital world. 
+           We create functional, secure, and scalable online stores tailored 
+           to each business's needs, integrating payment methods, inventory 
+           management, and an optimized user experience."
           </p>
           <button>Go</button>
         </motion.div>
@@ -73,12 +74,13 @@ const Services = () => {
           className="box"
           whileHover={{ background: "lightgray", color: "black" }}
         >
-          <h2>Branding</h2>
+          <h2>Landing Page</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            libero enim nisi aliquam consectetur expedita magni eius ex corrupti
-            animi! Ad nam pariatur assumenda quae mollitia libero repellat
-            explicabo maiores?
+          "We design and develop optimized landing pages to turn visitors
+           into customers. We create attractive, fast, and responsive 
+           interfaces focused on enhancing user experience and maximizing 
+           conversions. Our pages are strategically designed to capture 
+           leads, boost sales, and strengthen your business's online presence."
           </p>
           <button>Go</button>
         </motion.div>
@@ -86,28 +88,18 @@ const Services = () => {
           className="box"
           whileHover={{ background: "lightgray", color: "black" }}
         >
-          <h2>Branding</h2>
+          <h2>Solutions</h2>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            libero enim nisi aliquam consectetur expedita magni eius ex corrupti
-            animi! Ad nam pariatur assumenda quae mollitia libero repellat
-            explicabo maiores?
+          "We offer complete technological solutions for businesses and 
+          entrepreneurs. We develop web and mobile applications, eCommerce 
+          platforms, optimized landing pages, payment system integrations, 
+          process automation, and much more. Our focus is on creating 
+          efficient, secure, and scalable software tailored to each client's 
+          needs."
           </p>
           <button>Go</button>
         </motion.div>
-        <motion.div
-          className="box"
-          whileHover={{ background: "lightgray", color: "black" }}
-        >
-          <h2>Branding</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            libero enim nisi aliquam consectetur expedita magni eius ex corrupti
-            animi! Ad nam pariatur assumenda quae mollitia libero repellat
-            explicabo maiores?
-          </p>
-          <button>Go</button>
-        </motion.div>
+        
       </motion.div>
     </motion.div>
   );
