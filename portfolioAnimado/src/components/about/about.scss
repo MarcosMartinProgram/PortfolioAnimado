@@ -1,0 +1,37 @@
+@import "../../app.scss";
+
+.about {
+  padding: 40px 20px;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .wrapper {
+    max-width: 1200px;
+    margin: auto;
+    text-align: center;
+    padding: 20px;
+    
+
+    h1 {
+      font-size: 50px;
+     
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      
+      margin-bottom: 20px;
+    }
+
+    .contactInfo {
+      p {
+        font-size: 18px;
+        
+      }
+    }
+  }
+}

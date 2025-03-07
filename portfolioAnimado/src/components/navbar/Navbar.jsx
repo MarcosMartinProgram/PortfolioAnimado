@@ -19,8 +19,8 @@ const Navbar = () => {
                 <div className="social">
                     <a href="#"><img src="/facebook.svg" alt="Link Facebbok" /></a>
                     <a href="#"><img src="/instagram.svg" alt="Link Instagram" /></a>
-                    <a href="#"><img src="/linkedin.svg" alt="Link Linkedin" /></a>
-                    <a href="#"><img src="/github3.svg" alt="Link Github" /></a>
+                    <a href="https://www.linkedin.com/in/marcosmartinprogram"><img src="/linkedin.svg" alt="Link Linkedin" /></a>
+                    <a href="https://github.com/MarcosMartinProgram"><img src="/github3.svg" alt="Link Github" /></a>
 
                 </div>
             </div>
