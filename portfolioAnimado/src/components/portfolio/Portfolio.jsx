@@ -42,6 +42,7 @@ const items = [
     },
 ];
 
+
 const Single = ({ item }) => {
     const ref = useRef();
   
@@ -50,13 +51,18 @@ const Single = ({ item }) => {
     });
   
     const y = useTransform(scrollYProgress, [0, 1], [-300, 300]);
+    const webpImg = item.img.replace(".png", ".webp");
   
     return (
       <section >
         <div className="container">
           <div className="wrapper">
             <div className="imageContainer" ref={ref}>
+            <picture>
+              <source srcSet={webpImg} type="image/webp" />
               <img src={item.img} alt={item.title} />
+            </picture>
+              
             </div>
             <motion.div className="textContainer" style={{y}}>
               <h2>{item.title}</h2>

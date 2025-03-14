@@ -62,7 +62,12 @@ const Hero = () => {
                 Javascript React NextJs Java
             </motion.div>
             <div className="imageContainer">
-                <img src="/Hero.png" alt="Foto Personal" className="heroImage"/>    
+                <picture>
+                    <source srcSet="/Hero.webp" type="image/webp"/>
+                    <source srcSet="/Hero.png" type="image/png"/>
+                    <img src="/Hero.png" alt="Foto Personal" className="heroImage"/>
+                </picture>
+                    
             </div>    
         </div>
     )
