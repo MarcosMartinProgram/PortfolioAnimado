@@ -1,43 +1,41 @@
-import Test from "./Test";
-import "./app.scss";
-import About from "./components/about/About";
-import Contact from "./components/contact/Contact";
-import Cursor from "./components/cursor/Cursor";
-import Hero from "./components/hero/Hero";
-import Navbar from "./components/navbar/Navbar";
-import Parallax from "./components/parallax/Parallax";
-import Portfolio from "./components/portfolio/Portfolio";
-import Services from "./components/services/Services";
+import './app.scss';
+import { useState } from 'react';
+import About from './components/about/About';
+import Contact from './components/contact/Contact';
+import Cursor from './components/cursor/Cursor';
+import Footer from './components/footer/Footer';
+import Hero from './components/hero/Hero';
+import Navbar from './components/navbar/Navbar';
+import Parallax from './components/parallax/Parallax';
+import Portfolio from './components/portfolio/Portfolio';
+import Preloader from './components/preloader/Preloader';
+import { shouldShowIntro } from './components/preloader/intro';
+import Services from './components/services/Services';
+import { useLang } from './context/LanguageContext';
 
 const App = () => {
+  const { t } = useLang();
+  const [introDone, setIntroDone] = useState(() => !shouldShowIntro());
+
   return (
-    <div>
+    <>
+      <Preloader onDone={() => setIntroDone(true)} />
+      <a className="skipLink" href="#contenido">
+        {t.a11y.skip}
+      </a>
       <Cursor />
-      <section id="Homepage">
-        <Navbar />
-        <Hero />
-      </section>
-      <section id="Services">
+      <Navbar />
+      <main id="contenido">
+        <Hero started={introDone} />
         <Parallax type="services" />
-      </section>
-      <section>
         <Services />
-      </section>
-      <section id="Portfolio">
         <Parallax type="portfolio" />
-      </section>
-      <Portfolio />
-      
-      <section id="Contact">
-        <Contact />
-      </section>
-      <section id="About">
+        <Portfolio />
         <About />
-      </section>
-      {/* Framer Motion Crash Course */}
-      {/* <Test/>
-    <Test/> */}
-    </div>
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 };
 

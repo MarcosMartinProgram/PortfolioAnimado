@@ -1,111 +1,351 @@
-@import "../../app.scss";
-
 .portfolio {
+  background:
+    radial-gradient(900px 620px at 50% -5%, rgba(255, 159, 28, 0.05), transparent 70%),
+    var(--bg-soft);
+}
+
+.projectStack {
+  --stack-top: 92px;
+  --stack-step: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(26px, 5vh, 60px);
+}
+
+.projectCardWrap {
+  position: sticky;
+  top: calc(var(--stack-top) + var(--i) * var(--stack-step));
+  perspective: 2200px;
+  transform-origin: top center;
+  transform: translateY(calc(var(--cover, 0) * -10px)) scale(calc(1 - var(--cover, 0) * 0.045))
+    rotate(calc(var(--cover, 0) * var(--tilt, 0deg)));
+  will-change: transform;
+}
+
+.projectCardWrap:nth-child(odd) {
+  --tilt: -0.7deg;
+}
+
+.projectCardWrap:nth-child(even) {
+  --tilt: 0.7deg;
+}
+
+.projectCard {
   position: relative;
+  width: min(100%, calc((100svh - 150px) * 1.6));
+  margin-inline: auto;
+  aspect-ratio: 16 / 10;
+  transform-style: preserve-3d;
+  transition: transform 760ms cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-  .progress {
-    position: sticky;
-    top: 0;
-    left: 0;
-    padding-top: 50px;
-    text-align: center;
-    color: orange;
-    font-size: 36px;
+.projectCard.isFlipped {
+  transform: rotateY(180deg);
+}
 
-    @include mobile {
-      padding-top: calc(100vh - 100px);
-      font-size: 24px;
-    }
+.projectFront,
+.projectBack {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: clamp(18px, 2.2vw, 30px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
 
-    .progressBar {
-      height: 10px;
-      background-color: white;
-    }
+.projectFront {
+  display: block;
+  width: 100%;
+  padding: 0;
+  background: #0a0f1c;
+  box-shadow: 0 44px 100px -48px rgba(0, 0, 0, 0.95);
+  text-align: left;
+}
+
+.projectFront::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #05080f;
+  opacity: calc(var(--cover, 0) * 0.55);
+  pointer-events: none;
+}
+
+.projectFront::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 52%, rgba(5, 8, 15, 0.62));
+  pointer-events: none;
+}
+
+.projectFront img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 700ms var(--ease-out);
+}
+
+.projectIndex {
+  position: absolute;
+  bottom: clamp(18px, 2vw, 26px);
+  left: clamp(16px, 1.8vw, 24px);
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.66);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.55);
+}
+
+.projectIndex span {
+  color: var(--accent);
+}
+
+.projectCue {
+  position: absolute;
+  right: clamp(16px, 1.8vw, 24px);
+  bottom: clamp(16px, 1.8vw, 24px);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(8, 12, 22, 0.72);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background-color 200ms var(--ease-out), color 200ms var(--ease-out);
+}
+
+.projectCue svg {
+  width: 14px;
+  height: 14px;
+}
+
+.projectBack {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(54px, 7vh, 78px) clamp(24px, 4.2vw, 60px) clamp(28px, 4.5vh, 46px);
+  background:
+    radial-gradient(760px 460px at 88% -8%, rgba(255, 159, 28, 0.2), transparent 68%),
+    radial-gradient(620px 420px at -4% 108%, rgba(96, 132, 255, 0.14), transparent 70%),
+    linear-gradient(156deg, #1a2742 0%, #0e1526 54%, #0b1120 100%);
+  box-shadow:
+    0 44px 100px -48px rgba(0, 0, 0, 0.95),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  transform: rotateY(180deg);
+  pointer-events: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.projectCard.isFlipped .projectBack {
+  pointer-events: auto;
+}
+
+.projectCard.isFlipped .projectFront {
+  pointer-events: none;
+}
+
+.projectBackInner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: clamp(8px, 1.5vh, 14px);
+  max-width: 62ch;
+}
+
+.projectNumber {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: rgba(255, 255, 255, 0.42);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.projectNumber span {
+  color: var(--accent);
+}
+
+.projectBack h3 {
+  font-size: clamp(2rem, 4.2vw, 3.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.projectSubtitle {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.projectDesc {
+  max-width: 56ch;
+  margin-top: 4px;
+  color: rgba(238, 241, 247, 0.8);
+  font-size: clamp(0.96rem, 1.4vw, 1.1rem);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 6px;
+}
+
+.tags li {
+  padding: 5px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(238, 241, 247, 0.78);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.projectLinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: clamp(10px, 2vh, 18px);
+}
+
+.projectPrivate {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.projectClose {
+  position: absolute;
+  top: clamp(16px, 1.8vw, 24px);
+  right: clamp(16px, 1.8vw, 24px);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 15px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: background-color 200ms var(--ease-out);
+}
+
+.projectClose svg {
+  width: 15px;
+  height: 15px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .projectFront:hover .projectCue,
+  .projectFront:focus-visible .projectCue {
+    background: var(--accent);
+    color: #14100a;
   }
 
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .projectFront:hover img {
+    transform: scale(1.025);
+  }
+
+  .projectClose:hover {
+    background: rgba(255, 255, 255, 0.14);
+  }
+}
+
+@media (max-width: 900px) {
+  .projectStack {
+    --stack-top: 78px;
+    --stack-step: 10px;
+    gap: 22px;
+  }
+
+  .projectCard {
     width: 100%;
-    height: 100%;
-    overflow: hidden;
+    aspect-ratio: auto;
+    height: clamp(380px, 54svh, 440px);
+  }
 
-    .wrapper {
-      max-width: 1366px;
-      height: 100%;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 50px;
+  .projectFront img {
+    object-position: left top;
+  }
 
-      @include mobile {
-        flex-direction: column;
-      }
+  .projectBack {
+    justify-content: flex-start;
+    padding: 64px 22px 26px;
+  }
 
-      .imageContainer {
-        flex: 1;
-        height: 50%;
+  .projectBackInner {
+    gap: 8px;
+    max-width: none;
+  }
 
-        @include mobile {
-          object-fit: contain;
-          width: 100%;
-          max-height: 300px;
-        }
+  .projectBack h3 {
+    font-size: clamp(1.85rem, 7.2vw, 2.5rem);
+  }
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit:scale-down;
-          border-radius: 5%;
-          box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+  .projectDesc {
+    font-size: 0.95rem;
+  }
 
-          @include mobile {
-            object-fit: contain;
-          }
-        }
-      }
+  .projectCue {
+    padding: 9px 14px;
+    font-size: 0.73rem;
+  }
 
-      .textContainer {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 30px;
+  .projectClose {
+    padding: 8px 13px;
+    font-size: 0.73rem;
+  }
+}
 
-        @include mobile {
-          transform: none !important;
-          padding: 10px;
-          align-items: center;
-          text-align: center;
-        }
+@media (max-width: 900px) and (max-height: 700px) {
+  .projectCardWrap {
+    position: relative;
+    top: auto;
+    transform: none;
+  }
 
-        h2 {
-          font-size: 72px;
+  .projectFront::before {
+    display: none;
+  }
+}
 
-          @include mobile {
-            font-size: 36px;
-          }
-        }
+@media (prefers-reduced-motion: reduce) {
+  .projectCardWrap {
+    position: relative;
+    top: auto;
+    transform: none;
+  }
 
-        p {
-          color: gray;
-          font-size: 20px;
+  .projectCard {
+    transition: none;
+  }
 
-          @include mobile {
-            font-size: 16px;
-          }
-        }
+  .projectFront img {
+    transition: none;
+  }
 
-        button {
-          background-color: orange;
-          border: none;
-          border-radius: 10px;
-          padding: 10px;
-          width: 200px;
-          cursor: pointer;
-        }
-      }
-    }
+  .projectFront::before {
+    display: none;
   }
 }

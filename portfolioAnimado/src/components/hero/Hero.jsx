@@ -1,76 +1,81 @@
-import './hero.scss'
-import { motion } from "framer-motion"
+import { useLang } from '../../context/LanguageContext';
+import './hero.scss';
 
+const Arrow = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+);
 
-const textVariants = {
-    initial: {
-        x: -500,
-        opacity: 0,
-    },
-    animate: {
-        x: 0,
-        opacity: 1,
-        transition: {
-            duration: 1,
-            staggerChildren: 0.1,
-        },
-    },
-    scrollButton:{
-        opacity: 0,
-        y: 10,
-        transition:{
-            duration:2,
-            repeat:Infinity,
-        },
-    },
-};
+const Hero = ({ started = false }) => {
+  const { t } = useLang();
 
-const sliderVariants = {
-    initial: {
-        x: 0,
-       
-    },
-    animate: {
-        x: "-220%",
-        
-        transition: {
-            repeat:Infinity,
-            repeatType:"mirror",
-            duration: 20,
-            
-        },
-    },
-    
-};
+  return (
+    <section className={`hero ${started ? 'isStarted' : ''}`} id="inicio">
+      <div className="heroGrid">
+        <div className="heroCopy">
+          <p className="eyebrow heroItem" style={{ '--i': 0 }}>
+            <span className="dot" aria-hidden="true" />
+            {t.hero.eyebrow}
+          </p>
 
+          <h1>
+            <span className="line">
+              <span>{t.hero.titleA}</span>
+            </span>
+            <span className="line">
+              <span className="accent">{t.hero.titleB}</span>
+            </span>
+          </h1>
 
-const Hero = () => {
-    return(
-        <div className="hero">
-            <div className="wrapper">
-                <motion.div className="textContainer" variants={textVariants} initial="initial" animate="animate">
-                    <motion.h2 variants={textVariants}>MARCOS MARTIN</motion.h2>
-                    <motion.h1 variants={textVariants}>FullStack Developer</motion.h1>
-                    <motion.div variants={textVariants} className="buttons">
-                        <motion.button variants={textVariants}>See the Latest Works</motion.button>
-                        <motion.button variants={textVariants}>Contact Me</motion.button>
-                    </motion.div>
-                    <motion.img variants={textVariants} animate="scrollButton" src="/scroll.png" alt="" />
-                </motion.div>
-            </div>
-            <motion.div className="slidingTextContainer" variants={sliderVariants} initial="initial" animate="animate">
-                Javascript React NextJs Java
-            </motion.div>
-            <div className="imageContainer">
-                <picture>
-                    <source srcSet="/Hero.webp" type="image/webp"/>
-                    <source srcSet="/Hero.png" type="image/png"/>
-                    <img src="/Hero.png" alt="Foto Personal" className="heroImage"/>
-                </picture>
-                    
-            </div>    
+          <p className="heroLead heroItem" style={{ '--i': 3 }}>
+            {t.hero.lead}
+          </p>
+
+          <div className="heroActions heroItem" style={{ '--i': 4 }}>
+            <a className="btn btnPrimary" href="#proyectos">
+              {t.hero.ctaProjects}
+              <Arrow />
+            </a>
+            <a className="btn btnGhost" href="#contacto">
+              {t.hero.ctaContact}
+            </a>
+          </div>
+
+          <p className="heroNote heroItem" style={{ '--i': 5 }}>
+            {t.hero.note}
+          </p>
         </div>
-    )
+
+        <div className="heroVisual">
+          <span className="heroGlow" aria-hidden="true" />
+          <img
+            src="/Hero.webp"
+            alt={t.hero.imageAlt}
+            width="1162"
+            height="1280"
+            decoding="async"
+          />
+        </div>
+      </div>
+
+      <div className="marquee" aria-hidden="true">
+        <div className="marqueeTrack">
+          {[...t.hero.marquee, ...t.hero.marquee].map((tech, index) => (
+            <span key={index}>{tech}</span>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
-export default Hero
+export default Hero;

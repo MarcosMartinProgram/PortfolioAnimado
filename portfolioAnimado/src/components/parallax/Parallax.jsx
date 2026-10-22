@@ -1,36 +1,58 @@
-import { useRef } from "react";
-import "./parallax.scss";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion, useScroll, useTransform } from 'framer-motion';
+import { useLang } from '../../context/LanguageContext';
+import Reveal from '../reveal/Reveal';
+import './parallax.scss';
 
 const Parallax = ({ type }) => {
+  const { t, lang } = useLang();
+  const reduce = useReducedMotion();
+  const ref = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
 
-    const ref = useRef()
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  });
 
-    const {scrollYProgress} = useScroll({
-        target:ref,
-        offset:["start start", "end start"]
-    })
+  const y = useTransform(scrollYProgress, [0, 1], [-28, 28]);
 
-    const yText=useTransform(scrollYProgress, [0,1], ["0%", "500%"])
-    const yBg=useTransform(scrollYProgress, [0,1], ["0%", "100%"])
+  useEffect(() => {
+    const query = window.matchMedia('(max-width: 900px)');
+    const update = () => setIsMobile(query.matches);
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
 
-    return(
-        <div 
-            className="parallax"
-            ref={ref}
-            style={{
-                background:
-                    type==="services" 
-                    ? "linear-gradient(180deg, #111132, #0c0c1d)"
-                    : "linear-gradient(180deg, #111132, #505064)",              
-            }}
-        >
-            <motion.h1 style={{ y: yText }}>{type==="services" ? "What We Do?" : "What We Did?"}</motion.h1>
-            <motion.div className="mountains"></motion.div>
-            <motion.div className="planets" style={{ y: yBg, backgroundImage: `url(${type==="services" ? "/planets.png" : "/sun.png"})`}}></motion.div>
-            <motion.div style={{ x: yBg}} className="stars"></motion.div>
-        </div>
-    )
-}
+  const isServices = type === 'services';
+  const ghost = isServices
+    ? lang === 'es'
+      ? 'SERVICIOS'
+      : 'SERVICES'
+    : lang === 'es'
+      ? 'PROYECTOS'
+      : 'PROJECTS';
 
-export default Parallax
+  return (
+    <section className={`parallax parallax--${type}`} ref={ref}>
+      <motion.div
+        className="parallaxGhost"
+        style={isMobile || reduce ? undefined : { y }}
+        aria-hidden="true"
+      >
+        {ghost}
+      </motion.div>
+
+      <div className="parallaxContent">
+        <Reveal>
+          <p className="parallaxIndex">{isServices ? '01' : '02'}</p>
+          <h2>{isServices ? t.parallax.services : t.parallax.portfolio}</h2>
+          <p className="parallaxLead">{isServices ? t.services.intro : t.portfolio.intro}</p>
+        </Reveal>
+      </div>
+    </section>
+  );
+};
+
+export default Parallax;

@@ -1,0 +1,71 @@
+.footer {
+  padding: 38px 24px 30px;
+  border-top: 1px solid var(--line);
+  background: var(--bg);
+}
+
+.footerInner {
+  max-width: var(--max);
+  margin: 0 auto;
+}
+
+.footerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.footerBrand {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.footerBrand span {
+  color: var(--accent);
+}
+
+.footerCopy {
+  color: var(--muted);
+  font-size: 0.8rem;
+  order: 3;
+  width: 100%;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 18px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.footerNote {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.74rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .footerLinks a:hover {
+    color: var(--text);
+  }
+}
+
+@media (min-width: 740px) {
+  .footerCopy {
+    order: 2;
+    width: auto;
+  }
+
+  .footerLinks {
+    order: 3;
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    padding: 32px 20px 26px;
+  }
+}

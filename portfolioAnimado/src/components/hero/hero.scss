@@ -1,93 +1,269 @@
-@import "../../app.scss";
-
 .hero {
-  height: calc(100vh - 100px);
-  overflow: hidden;
-  background: linear-gradient(180deg, #0c0c1d, #111132);
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  padding: 108px 24px 0;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 520px at 78% 12%, rgba(255, 159, 28, 0.1), transparent 62%),
+    radial-gradient(700px 500px at 8% 80%, rgba(56, 97, 251, 0.08), transparent 65%),
+    var(--bg);
+}
 
-  .wrapper {
-    max-width: 1366px;
-    height: 100%;
-    margin: auto;
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: clamp(24px, 5vw, 64px);
+  flex: 1;
+  width: 100%;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-bottom: 44px;
+}
 
-    .textContainer {
-      width: 50%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 40px;
+.heroCopy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 22px;
+}
 
-      @include mobile {
-        height: 50%;
-        width: 100%;
-        gap: 20px;
-        align-items: center;
-        text-align: center;
-      }
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 5.2rem);
+  line-height: 0.96;
+  letter-spacing: -0.045em;
+  text-wrap: initial;
+}
 
-      h2 {
-        font-size: 30px;
-        color: rebeccapurple;
-        letter-spacing: 10px;
-      }
+.hero h1 .line {
+  display: block;
+  margin-bottom: -0.08em;
+  padding-bottom: 0.08em;
+  overflow: hidden;
+}
 
-      h1 {
-        font-size: 88px;
+.hero h1 .line > span {
+  display: block;
+  opacity: 0;
+}
 
-        @include mobile {
-          font-size: 36px;
-        }
-      }
+.heroCopy .heroItem {
+  opacity: 0;
+}
 
-      .buttons {
-        button {
-          padding: 20px;
-          border: 1px solid white;
-          border-radius: 10px;
-          background-color: transparent;
-          color: white;
-          margin-right: 20px;
-          cursor: pointer;
-          font-weight: 300;
-        }
-      }
+.hero.isStarted h1 .line > span {
+  opacity: 1;
+  animation: lineIn 780ms var(--ease-out) backwards;
+}
 
-      img {
-        width: 50px;
-      }
-    }
+.hero.isStarted h1 .line:nth-child(1) > span {
+  animation-delay: 40ms;
+}
+
+.hero.isStarted h1 .line:nth-child(2) > span {
+  animation-delay: 130ms;
+}
+
+.hero.isStarted .heroItem {
+  opacity: 1;
+  animation: fadeUp 620ms var(--ease-out) backwards;
+  animation-delay: calc(var(--i) * 70ms + 80ms);
+}
+
+.hero h1 .accent {
+  color: var(--accent);
+}
+
+.heroLead {
+  max-width: 46ch;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.heroNote {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.heroVisual {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 380px;
+}
+
+.heroVisual img {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 470px;
+  max-height: min(68svh, 620px);
+  object-fit: contain;
+  object-position: bottom center;
+  filter: brightness(1.04) contrast(1.02) drop-shadow(0 24px 48px rgba(0, 0, 0, 0.45));
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 66%,
+    rgba(0, 0, 0, 0.5) 82%,
+    rgba(0, 0, 0, 0.12) 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 66%,
+    rgba(0, 0, 0, 0.5) 82%,
+    rgba(0, 0, 0, 0.12) 94%,
+    transparent 100%
+  );
+}
+
+.heroGlow {
+  position: absolute;
+  bottom: 4%;
+  width: 74%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 148, 40, 0.4),
+    rgba(255, 90, 40, 0.12) 46%,
+    transparent 68%
+  );
+  filter: blur(46px);
+}
+
+.marquee {
+  width: 100%;
+  padding: 15px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+}
+
+.marqueeTrack {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: marquee 36s linear infinite;
+}
+
+.marqueeTrack span {
+  padding-right: 46px;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.marqueeTrack span::after {
+  content: "·";
+  margin-left: 46px;
+  color: var(--accent);
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes lineIn {
+  from {
+    transform: translateY(112%);
   }
 
-  .imageContainer {
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
+  to {
+    transform: none;
+  }
+}
 
-    @include mobile {
-      height: 50%;
-      width: 100%;
-      top: unset;
-      bottom: 0;
-      position: relative;
-    }
-
-    img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
   }
 
-  .slidingTextContainer {
-    position: absolute;
-    font-size: 50vh;
-    bottom: -120px;
-    white-space: nowrap;
-    color: #ffffff09;
-    width: 50%;
-    font-weight: bold;
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: 100svh;
+    padding: 96px 20px 0;
+  }
+
+  .heroGrid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+    padding-bottom: 28px;
+  }
+
+  .heroCopy {
+    gap: 16px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 12vw, 3.6rem);
+  }
+
+  .heroVisual {
+    min-height: 0;
+  }
+
+  .heroVisual img {
+    max-width: 300px;
+    max-height: 32svh;
+  }
+
+  .heroGlow {
+    width: 60%;
+    filter: blur(34px);
+  }
+
+  .heroNote {
+    font-size: 0.68rem;
+  }
+
+  .marquee {
+    margin: 0 -20px;
+    width: calc(100% + 40px);
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  .heroVisual img {
+    max-width: 380px;
+    max-height: 38svh;
+  }
+}
+
+@media (max-width: 380px) {
+  .heroVisual img {
+    max-height: 28svh;
   }
 }

@@ -1,14 +1,33 @@
-@import "../../app.scss";
-
-.cursor{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid white;
+.cursor {
   position: fixed;
-  z-index: 999;
+  top: 0;
+  left: 0;
+  z-index: 1100;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s var(--ease-out),
+    background-color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out);
+}
 
-  @include mobile{
+.cursor--ready {
+  opacity: 1;
+}
+
+.cursor--active {
+  border-color: rgba(255, 159, 28, 0.55);
+  background: rgba(255, 159, 28, 0.12);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor {
     display: none;
   }
 }

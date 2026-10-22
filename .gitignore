@@ -1,0 +1,16 @@
+node_modules/
+dist/
+dist-ssr/
+.vercel/
+.unlighthouse/
+.env
+.env.local
+.env.*.local
+*.log
+dom.html
+
+/pw-*.png
+/sec-*.png
+/shot-*.png
+/zoom-*.png
+/mpm-*.jpg

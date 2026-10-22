@@ -1,0 +1,150 @@
+.menuToggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 44px;
+  height: 44px;
+  margin-left: 6px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+}
+
+.menuToggle span {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  border-radius: 2px;
+  background: var(--text);
+}
+
+.menuOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px 28px;
+  background: #f2efe7;
+  color: #0a0d16;
+  pointer-events: none;
+}
+
+.menuOverlay.isOpen {
+  pointer-events: auto;
+}
+
+.menuTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menuBrand {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
+.menuBrand span {
+  color: #d97400;
+}
+
+.menuClose {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(10, 13, 22, 0.16);
+  border-radius: 50%;
+  color: #0a0d16;
+}
+
+.menuClose svg {
+  width: 18px;
+  height: 18px;
+}
+
+.menuNav {
+  display: flex;
+  flex-direction: column;
+  margin-top: clamp(28px, 8vh, 72px);
+}
+
+.menuNav a {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(10, 13, 22, 0.08);
+  font-size: clamp(1.9rem, 9vw, 3.4rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  transition: translate 0.25s var(--ease-out);
+}
+
+.menuIndex {
+  color: #b4620a;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.menuFoot {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 28px;
+}
+
+.menuEmail {
+  font-size: 0.92rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  word-break: break-word;
+}
+
+.menuMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  color: rgba(10, 13, 22, 0.66);
+  font-size: 0.85rem;
+}
+
+.menuLang {
+  color: #a95900;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .menuNav a:hover {
+    translate: 8px 0;
+  }
+
+  .menuClose:hover {
+    background: rgba(10, 13, 22, 0.05);
+  }
+
+  .menuMeta a:hover {
+    color: #0a0d16;
+  }
+}
+
+@media (max-width: 900px) {
+  .menuToggle {
+    display: flex;
+  }
+}
+
+@media (min-width: 901px) {
+  .menuOverlay {
+    display: none;
+  }
+}

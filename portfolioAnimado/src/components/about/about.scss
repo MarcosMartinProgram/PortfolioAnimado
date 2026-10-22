@@ -1,37 +1,86 @@
-@import "../../app.scss";
-
 .about {
-  padding: 40px 20px;
-  min-height: 100vh;
+  background:
+    radial-gradient(720px 420px at 90% 10%, rgba(255, 159, 28, 0.06), transparent 70%),
+    var(--bg);
+}
+
+.aboutGrid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: start;
+  gap: clamp(32px, 6vw, 80px);
+}
+
+.aboutGrid h2 {
+  max-width: 20ch;
+  margin: 14px 0 22px;
+}
+
+.aboutText {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 54ch;
+}
 
-  .wrapper {
-    max-width: 1200px;
-    margin: auto;
-    text-align: center;
-    padding: 20px;
-    
+.aboutText p {
+  color: var(--muted);
+  font-size: 0.98rem;
+}
 
-    h1 {
-      font-size: 50px;
-     
-      margin-bottom: 20px;
-    }
+.aboutCta {
+  margin-top: 26px;
+}
 
-    p {
-      font-size: 18px;
-      line-height: 1.6;
-      
-      margin-bottom: 20px;
-    }
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--line);
+}
 
-    .contactInfo {
-      p {
-        font-size: 18px;
-        
-      }
-    }
+.fact {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 108px;
+  padding: 20px;
+  background: var(--surface);
+}
+
+.fact dt {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.fact dd {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+@media (max-width: 900px) {
+  .aboutGrid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .aboutText p {
+    font-size: 0.95rem;
+  }
+
+  .fact {
+    min-height: 96px;
+    padding: 16px;
+  }
+
+  .fact dd {
+    font-size: 0.86rem;
   }
 }

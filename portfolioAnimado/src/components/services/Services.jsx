@@ -1,107 +1,107 @@
-import { useRef } from "react";
-import "./services.scss";
-import { motion, useInView } from "framer-motion";
+import { useLang } from '../../context/LanguageContext';
+import Reveal from '../reveal/Reveal';
+import './services.scss';
 
-const variants = {
-  initial: {
-    x: -500,
-    y: 100,
-    opacity: 0,
-  },
-  animate: {
-    x: 0,
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 1,
-      staggerChildren: 0.1,
-    },
-  },
-};
+const Arrow = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M5 12h14M13 6l6 6-6 6" />
+  </svg>
+);
+
+const ICONS = [
+  <svg
+    key="systems"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <rect x="3" y="4" width="18" height="12" rx="2" />
+    <path d="M8 20h8M12 16v4" />
+  </svg>,
+  <svg
+    key="commerce"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M3 4h2l2.3 11h10.9L21 8H6" />
+    <circle cx="9" cy="20" r="1.4" />
+    <circle cx="18" cy="20" r="1.4" />
+  </svg>,
+  <svg
+    key="api"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M8 9 4 12l4 3M16 9l4 3-4 3M13 5l-2 14" />
+  </svg>,
+];
 
 const Services = () => {
-  const ref = useRef();
-
-  const isInView = useInView(ref, { margin: "-100px" });
+  const { t } = useLang();
 
   return (
-    <motion.div
-      className="services"
-      variants={variants}
-      initial="initial"
-      // animate="animate"
-      // whileInView="animate"
-      ref={ref}
-      animate={"animate"}
-    >
-      <motion.div className="textContainer" variants={variants}>
-        <p>
-        I specialize in fullstack development to help your
-          <br /> digital presence grow and evolve
-        </p>
-        <hr />
-      </motion.div>
-      <motion.div className="titleContainer" variants={variants}>
-        <div className="title">
-          <img src="/people.webp" alt="" />
-          <h1>
-            <motion.b whileHover={{color:"orange"}}>Innovative</motion.b> Solutions 
-          </h1>
+    <section className="services section" id="servicios">
+      <div className="sectionInner">
+        <Reveal className="sectionHead">
+          <p className="eyebrow">{t.services.eyebrow}</p>
+          <h2>{t.services.title}</h2>
+          <p className="sectionLead">{t.services.intro}</p>
+        </Reveal>
+
+        <div className="serviceGrid">
+          {t.services.items.map((item, index) => (
+            <Reveal key={item.title} delay={index * 0.07}>
+              <article className="serviceCard">
+                <div className="serviceTop">
+                  <span className="serviceIcon" aria-hidden="true">
+                    {ICONS[index]}
+                  </span>
+                  <span className="serviceIndex" aria-hidden="true">
+                    0{index + 1}
+                  </span>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.desc}</p>
+                <ul>
+                  {item.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              </article>
+            </Reveal>
+          ))}
         </div>
-        <div className="title">
-          <h1>
-            <motion.b whileHover={{color:"orange"}}>For Your</motion.b> Business.
-          </h1>
-          <button>WHAT WE DO?</button>
-        </div>
-      </motion.div>
-      <motion.div className="listContainer" variants={variants}>
-        <motion.div
-          className="box"
-          whileHover={{ background: "lightgray", color: "black" }}
-        >
-          <h2>Ecommerce</h2>
-          <p>
-          "We develop custom eCommerce solutions for businesses, helping
-           them expand their reach and optimize sales in the digital world. 
-           We create functional, secure, and scalable online stores tailored 
-           to each business's needs, integrating payment methods, inventory 
-           management, and an optimized user experience."
-          </p>
-          <button>Go</button>
-        </motion.div>
-        <motion.div
-          className="box"
-          whileHover={{ background: "lightgray", color: "black" }}
-        >
-          <h2>Landing Page</h2>
-          <p>
-          "We design and develop optimized landing pages to turn visitors
-           into customers. We create attractive, fast, and responsive 
-           interfaces focused on enhancing user experience and maximizing 
-           conversions. Our pages are strategically designed to capture 
-           leads, boost sales, and strengthen your business's online presence."
-          </p>
-          <button>Go</button>
-        </motion.div>
-        <motion.div
-          className="box"
-          whileHover={{ background: "lightgray", color: "black" }}
-        >
-          <h2>Solutions</h2>
-          <p>
-          "We offer complete technological solutions for businesses and 
-          entrepreneurs. We develop web and mobile applications, eCommerce 
-          platforms, optimized landing pages, payment system integrations, 
-          process automation, and much more. Our focus is on creating 
-          efficient, secure, and scalable software tailored to each client's 
-          needs."
-          </p>
-          <button>Go</button>
-        </motion.div>
-        
-      </motion.div>
-    </motion.div>
+
+        <Reveal delay={0.1}>
+          <a className="textLink servicesCta" href="#contacto">
+            {t.services.cta}
+            <Arrow />
+          </a>
+        </Reveal>
+      </div>
+    </section>
   );
 };
 

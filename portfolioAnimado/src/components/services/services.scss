@@ -1,147 +1,106 @@
-@import "../../app.scss";
 .services {
-  background: linear-gradient(180deg, #0c0c1d, #111132);
-  height: 100%;
+  background: var(--bg);
+}
+
+.serviceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  margin-bottom: 42px;
+}
+
+.serviceGrid > div {
+  display: flex;
+}
+
+.serviceCard {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 14px;
+  padding: 26px 24px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015));
+  transition:
+    border-color 0.3s var(--ease-out),
+    background-color 0.3s var(--ease-out);
+}
+
+.serviceTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.serviceIcon {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255, 159, 28, 0.25);
+  border-radius: 12px;
+  background: rgba(255, 159, 28, 0.1);
+  color: var(--accent);
+}
+
+.serviceIcon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.serviceIndex {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+}
+
+.serviceCard p {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.serviceCard ul {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 6px;
+}
 
-  .textContainer {
-    flex: 1;
-    align-self: flex-end;
-    display: flex;
-    align-items: center;
-    gap: 20px;
+.serviceCard li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  color: rgba(238, 241, 247, 0.76);
+  font-size: 0.86rem;
+}
 
-    @include mobile {
-      align-self: center;
-      text-align: center;
-      flex-direction: column;
-    }
+.serviceCard li::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  translate: 0 -2px;
+}
 
-    p {
-      font-weight: 200;
-      font-size: 20px;
-      color: gray;
-      text-align: right;
-    }
+.servicesCta {
+  margin-top: 2px;
+}
 
-    hr {
-      width: 500px;
-      border: none;
-      border-top: 0.5px solid gray;
-
-      @include mobile {
-        width: 300px;
-      }
-    }
+@media (hover: hover) and (pointer: fine) {
+  .serviceCard:hover {
+    border-color: rgba(255, 159, 28, 0.4);
+    background: linear-gradient(160deg, rgba(255, 159, 28, 0.08), rgba(255, 255, 255, 0.02));
   }
-  .titleContainer {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+}
 
-    @include mobile {
-      width: 100%;
-    }
-
-    .title {
-      display: flex;
-      align-items: center;
-      gap: 50px;
-
-      @include mobile {
-        flex-direction: column;
-        text-align: center;
-        gap: 20px;
-      }
-
-      img {
-        width: 300px;
-        height: 100px;
-        border-radius: 50px;
-        object-fit: cover;
-
-        @include mobile {
-          width: 200px;
-          height: 50px;
-        }
-      }
-
-      h1 {
-        font-size: 86px;
-        font-weight: 100;
-
-        @include mobile {
-          font-size: 36px;
-        }
-      }
-
-      button {
-        width: 300px;
-        height: 100px;
-        border-radius: 50px;
-        background-color: orange;
-        border: none;
-        font-size: 24px;
-        cursor: pointer;
-
-        @include mobile {
-          font-size: 16px;
-          width: 150px;
-          height: 50px;
-        }
-      }
-    }
-  }
-  .listContainer {
-    flex: 2;
-    display: flex;
-    max-width: 1366px;
-    margin: auto;
-
-    @include mobile {
-      flex-direction: column;
-      width: 100%;
-      gap: 20px;
-    }
-
-    .box {
-      padding: 50px;
-      border: 0.5px solid gray;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      @include mobile {
-        border: none;
-        align-items: center;
-        gap: 20px;
-        padding: 10px;
-      }
-
-      p {
-        @include mobile {
-          display: none;
-        }
-      }
-
-      button {
-        padding: 10px;
-        background-color: orange;
-        border: none;
-        cursor: pointer;
-
-        @include mobile {
-          background-color: transparent;
-          border: 1px solid orange;
-          border-radius: 5px;
-          color: orange;
-          width: 50%;
-          padding: 5px;
-        }
-      }
-    }
+@media (max-width: 900px) {
+  .serviceCard {
+    padding: 24px 22px;
   }
 }

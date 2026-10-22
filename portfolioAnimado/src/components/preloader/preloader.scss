@@ -1,0 +1,545 @@
+.preloader {
+  --mx: 0px;
+  --my: 0px;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  padding: 24px;
+  background:
+    radial-gradient(900px 620px at 22% 108%, rgba(255, 159, 28, 0.14), transparent 64%),
+    radial-gradient(720px 520px at 88% -8%, rgba(56, 97, 251, 0.12), transparent 62%),
+    #05080f;
+  transform: translateY(0);
+  transition: transform 720ms cubic-bezier(0.76, 0, 0.16, 1);
+  will-change: transform;
+}
+
+.preloader::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse at center, #000 26%, transparent 78%);
+  pointer-events: none;
+}
+
+.preloader::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 159, 28, 0.55), transparent);
+}
+
+.preloader.isLeaving {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+.plGlyphs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transform: translate3d(var(--mx), var(--my), 0);
+  transition: transform 900ms var(--ease-out);
+}
+
+.plGlyph {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: clamp(10px, 1.1vw, 14px);
+  letter-spacing: 0.04em;
+  opacity: var(--o);
+  animation: glyphDrift var(--dur) var(--delay) ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.plInner {
+  position: relative;
+  width: min(700px, 100%);
+  transition: opacity 300ms var(--ease-out);
+}
+
+.preloader.isLeaving .plInner {
+  opacity: 0;
+}
+
+.plTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 26px;
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  animation: plFadeIn 620ms var(--ease-out) 120ms backwards;
+}
+
+.plBrand {
+  color: rgba(238, 241, 247, 0.72);
+  letter-spacing: 0.08em;
+  text-transform: none;
+}
+
+.plBrand span {
+  color: var(--accent);
+}
+
+.plPhase {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.plWindow {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  border-radius: 14px;
+  background: linear-gradient(170deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012) 45%);
+  box-shadow:
+    0 40px 120px -46px rgba(0, 0, 0, 0.9),
+    0 0 0 1px rgba(0, 0, 0, 0.35) inset;
+  transition:
+    transform 360ms var(--ease-out),
+    border-color 400ms var(--ease-out),
+    box-shadow 400ms var(--ease-out);
+  animation: plWindowIn 700ms var(--ease-out) 60ms backwards;
+}
+
+.preloader.isDone .plWindow {
+  border-color: rgba(52, 211, 153, 0.4);
+  box-shadow:
+    0 40px 120px -46px rgba(0, 0, 0, 0.9),
+    0 0 34px -10px rgba(52, 211, 153, 0.35);
+}
+
+.preloader.isLeaving .plWindow {
+  transform: translateY(-12px) scale(0.988);
+}
+
+.plWinBar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 38px;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.plDots {
+  display: flex;
+  flex: none;
+  gap: 6px;
+}
+
+.plDots i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.plDots i:first-child {
+  background: rgba(255, 159, 28, 0.6);
+}
+
+.plTabs {
+  display: flex;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.plTab {
+  padding: 5px 10px;
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.32);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.plTab.isOn {
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(238, 241, 247, 0.86);
+}
+
+.plEncoding {
+  margin-left: auto;
+  color: rgba(255, 255, 255, 0.26);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.12em;
+}
+
+.plViewport {
+  position: relative;
+  height: clamp(188px, 34vh, 268px);
+  padding: 16px 18px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent 0, #000 12px, #000 100%);
+}
+
+.plCode {
+  position: relative;
+  transition: transform 140ms linear;
+}
+
+.plLine {
+  display: flex;
+  gap: 16px;
+  min-height: 1.9em;
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.9;
+}
+
+.plNum {
+  flex: none;
+  width: 2.2ch;
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  transition: color 220ms var(--ease-out);
+}
+
+.plLine.isActive .plNum {
+  color: var(--accent);
+}
+
+.plLine.isDone .plNum {
+  color: rgba(52, 211, 153, 0.5);
+}
+
+.plText {
+  color: rgba(236, 240, 248, 0.9);
+  white-space: pre;
+}
+
+.plChar {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(3px);
+  transition:
+    opacity 170ms var(--ease-out),
+    transform 220ms var(--ease-out);
+}
+
+.plChar.isIn {
+  opacity: 1;
+  transform: none;
+}
+
+.plCaret {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 1.35em;
+  border-radius: 1px;
+  background: var(--accent);
+  opacity: 0;
+  box-shadow: 0 0 8px rgba(255, 159, 28, 0.7);
+  will-change: transform;
+}
+
+.plCaret.isOn {
+  opacity: 1;
+  animation: caretBlink 1s step-end infinite;
+}
+
+.preloader.isDone .plCaret {
+  background: #34d399;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.7);
+}
+
+.plScan {
+  position: absolute;
+  top: -40%;
+  right: 0;
+  left: 0;
+  height: 38%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 159, 28, 0.055) 45%,
+    rgba(255, 255, 255, 0.035) 50%,
+    transparent
+  );
+  pointer-events: none;
+  animation: scanSweep 3.8s linear infinite;
+}
+
+.plWinFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  height: 26px;
+  padding: 0 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.3);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 9.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.plPos {
+  color: rgba(255, 255, 255, 0.46);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  text-transform: none;
+}
+
+.tok-k {
+  color: #ffb457;
+}
+
+.tok-s {
+  color: #86efac;
+}
+
+.tok-fn {
+  color: #93c5fd;
+}
+
+.tok-n {
+  color: #fca5a5;
+}
+
+.tok-prop {
+  color: #a5b4fc;
+}
+
+.tok-v {
+  color: rgba(236, 240, 248, 0.9);
+}
+
+.tok-p {
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.plFoot {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+  animation: plFadeIn 620ms var(--ease-out) 260ms backwards;
+}
+
+.plStatus {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  color: rgba(255, 255, 255, 0.58);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.preloader.isDone .plStatus > span:first-child {
+  color: #6ee7b7;
+}
+
+.plPct {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.plBar {
+  height: 2px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.plBar span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-strong));
+  box-shadow: 0 0 10px rgba(255, 159, 28, 0.5);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: background 300ms var(--ease-out);
+}
+
+.preloader.isDone .plBar span {
+  background: #34d399;
+  box-shadow: 0 0 10px rgba(52, 211, 153, 0.5);
+}
+
+.plSkip {
+  justify-self: end;
+  margin-top: 2px;
+  padding: 8px 0;
+  border: 0;
+  background: none;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Consolas, monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 200ms var(--ease-out);
+}
+
+.plSkip:hover {
+  color: var(--text);
+}
+
+.plSkip:focus-visible {
+  border-radius: 4px;
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+body.isIntro {
+  overflow: hidden;
+}
+
+@keyframes plWindowIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes plFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes caretBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes scanSweep {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(420%);
+  }
+}
+
+@keyframes glyphDrift {
+  from {
+    transform: translate3d(0, 0, 0) rotate(var(--rot));
+  }
+
+  to {
+    transform: translate3d(var(--dx), var(--dy), 0) rotate(calc(var(--rot) + 6deg));
+  }
+}
+
+@media (max-width: 760px) {
+  .preloader {
+    padding: 20px;
+  }
+
+  .plTop {
+    margin-bottom: 18px;
+  }
+
+  .plViewport {
+    height: clamp(180px, 38vh, 244px);
+    padding: 14px;
+  }
+
+  .plLine {
+    gap: 12px;
+    font-size: 10.5px;
+  }
+
+  .plNum {
+    width: 2ch;
+    font-size: 9px;
+  }
+
+  .plWinFoot {
+    font-size: 9px;
+  }
+
+  .plGlyphs {
+    display: none;
+  }
+
+  .plFoot {
+    margin-top: 18px;
+  }
+
+  .plTab:nth-child(2) {
+    display: none;
+  }
+}
+
+@media (max-height: 700px) {
+  .plTop {
+    margin-bottom: 16px;
+  }
+
+  .plViewport {
+    height: clamp(160px, 30vh, 220px);
+  }
+
+  .plFoot {
+    margin-top: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader {
+    transition-duration: 0.01ms;
+  }
+
+  .plGlyph,
+  .plScan {
+    animation: none;
+  }
+
+  .plTop,
+  .plWindow,
+  .plFoot {
+    animation: none;
+  }
+
+  .plChar {
+    transition: none;
+  }
+}
