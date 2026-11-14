@@ -1,29 +1,49 @@
-import { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
+import { useState } from 'react';
 import { useLang } from '../../context/LanguageContext';
 import Reveal from '../reveal/Reveal';
 import './contact.scss';
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || 'service_94y20xo';
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || 'template_v10u2oh';
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || 'pX_2hasGmGcuvjXIW';
+const SUPABASE_URL =
+  import.meta.env.VITE_SUPABASE_URL || 'https://uwvkziopxclbampbmrwi.supabase.co';
+const SUPABASE_ANON_KEY =
+  import.meta.env.VITE_SUPABASE_ANON_KEY || 'sb_publishable_d5KiM0dCZe6ZW2fDI6aUkA_6YD454Kk';
+const CONTACT_ENDPOINT = `${SUPABASE_URL}/functions/v1/send-contact-email`;
 
 const Contact = () => {
   const { t } = useLang();
-  const formRef = useRef(null);
   const [status, setStatus] = useState('idle');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (status === 'sending') return;
 
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
+    if (data.get('website')) {
+      setStatus('success');
+      return;
+    }
+
     setStatus('sending');
 
     try {
-      await emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, {
-        publicKey: PUBLIC_KEY,
+      const response = await fetch(CONTACT_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: SUPABASE_ANON_KEY,
+          Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify({
+          name: String(data.get('name') ?? ''),
+          email: String(data.get('email') ?? ''),
+          message: String(data.get('message') ?? ''),
+        }),
       });
-      formRef.current.reset();
+
+      if (!response.ok) throw new Error('contact failed');
+      form.reset();
       setStatus('success');
     } catch {
       setStatus('error');
@@ -90,7 +110,16 @@ const Contact = () => {
             />
           </svg>
 
-          <form ref={formRef} className="contactForm" onSubmit={handleSubmit} onFocus={handleFocus}>
+          <form className="contactForm" onSubmit={handleSubmit} onFocus={handleFocus}>
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              hidden
+            />
+
             <div className="field">
               <label htmlFor="name">{t.contact.form.name}</label>
               <input
