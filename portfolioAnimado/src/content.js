@@ -79,6 +79,15 @@ export const content = {
       close: 'Volver',
       items: [
         {
+          title: 'PetShop Patitas',
+          subtitle: 'POS + rentabilidad',
+          desc: 'Punto de venta para pet shops: venta por peso, carrito, turnos, clientes con mascotas, arqueo de caja y rentabilidad neta. Frontend Next.js, API Fastify, PostgreSQL y cobro con Mercado Pago.',
+          tags: ['Next.js', 'Fastify', 'PostgreSQL', 'Prisma'],
+          image: '/projects/petshoppatitas.png',
+          demo: 'https://petshoppatitas.com.ar',
+          code: null,
+        },
+        {
           title: 'Super Mitre',
           subtitle: 'E-commerce + punto de venta',
           desc: 'Ecosistema de punto de venta para supermercado: tienda online, caja, control de stock y app Android para ventas en campo. Backend con MySQL, Sequelize y Mercado Pago.',
@@ -254,6 +263,15 @@ export const content = {
       details: 'View details',
       close: 'Back',
       items: [
+        {
+          title: 'PetShop Patitas',
+          subtitle: 'POS + profitability',
+          desc: 'Point of sale for pet shops: sales by weight, cart, appointments, clients with pets, cash reconciliation and net profitability. Next.js frontend, Fastify API, PostgreSQL and Mercado Pago payments.',
+          tags: ['Next.js', 'Fastify', 'PostgreSQL', 'Prisma'],
+          image: '/projects/petshoppatitas.png',
+          demo: 'https://petshoppatitas.com.ar',
+          code: null,
+        },
         {
           title: 'Super Mitre',
           subtitle: 'E-commerce + point of sale',
